@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import HighOrderComponent from "./components/HighOrderComponent";
+import CreateExperience from "./pages/CreateExperience";
+import EditExperience from "./pages/EditExperience";
+import ErrorPage from "./pages/ErrorPage";
+import ExpDashboard from "./pages/ExpDashboard";
+import HomePage from "./pages/HomePage";
+import ImageExperience from "./pages/ImageExperience";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export class App extends Component {
+  render() {
+    return (
+      <BrowserRouter >
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/experiences" component={HighOrderComponent(ExpDashboard)} />
+          <Route exact path="/addexperience" component={HighOrderComponent(CreateExperience)} />
+          <Route exact path="/addimageExperience" component={HighOrderComponent(ImageExperience)} />
+          <Route exact path="/editExperience/:id" component={HighOrderComponent(EditExperience)} />
+          <Route component={ErrorPage} />
+        </Switch>
+        {/* <HomePage /> */}
+        {/* <Dashboard /> */}
+      </BrowserRouter>
+    )
+  }
 }
 
-export default App;
+export default App
+
